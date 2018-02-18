@@ -5,7 +5,7 @@ import config from './config';
 
 const sqldb = config.sqldb;
 
-var Conn = new Sequelize("bazasql", "sa", "SqlDevOps2018", {
+var Conn = new Sequelize(sqldb.database, sqldb.username, sqldb.password, {
   host: sqldb.server,
   port: sqldb.port,
   dialect: sqldb.dialect,
@@ -47,12 +47,18 @@ Person.hasMany(Post);
 Post.belongsTo(Person);
 
 Conn.sync({ force: true})
-.then(()=>{   
+ .then(()=>{   
      _.times(10, ()=>{
         return Person.create({
             firstName: Faker.name.firstName(),
              lastName: Faker.name.lastName(),
             email: Faker.internet.email()
+        })
+        .then( (person) => {
+            return person.createPost({
+                title: `Ksiązka demo kupiona przez ${person.firstName}`,
+                content: 'Przykladowy artykul do ksaizki'
+            });
         });
     });
 });

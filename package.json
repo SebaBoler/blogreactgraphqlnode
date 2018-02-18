@@ -10,7 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-node5": "^12.0.1",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
     "faker": "^4.1.0",
+    "graphiql": "^0.11.11",
+    "graphql": "^0.13.1",
     "lodash": "^4.17.5",
     "sequelize": "^4.33.4",
     "tedious": "^2.3.1",

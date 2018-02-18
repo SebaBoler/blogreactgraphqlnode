@@ -5,10 +5,9 @@ const config = {
         server: "localhost",
         port: "1433",
         dialectOptions: {
-      // Not needed if you connect to the default instance
         instanceName: "MSSQLSERVER"
         },
-    database: "mojaBaza",
+    database: "bazasql",
     username: "sa",
     password: "SqlDevOps2018"
     }
