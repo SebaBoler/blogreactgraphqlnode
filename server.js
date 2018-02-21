@@ -1,8 +1,9 @@
 import Express from 'express';
 import GraphHTTP from 'express-graphql';
 import Schema from './schema';
+import config from "./config";
 
-const APP_PORT = 3000;
+const APP_PORT = config.port;
 
 const app = Express();
 
@@ -13,5 +14,5 @@ app.use('/graphql', GraphHTTP({
 }));
 
 app.listen(APP_PORT, () => {
-    console.log(`Serwer dziala na porcie ${APP_PORT}`);
+    console.log(`Server working on port:  ${APP_PORT}`);
 });

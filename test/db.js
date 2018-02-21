@@ -57,7 +57,11 @@ const Post = Conn.define('post', {
         type: Sequelize.STRING
     },
     personId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+            model: person,
+            key: 'personId'
+        }
     }
 })
 

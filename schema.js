@@ -12,16 +12,22 @@ const Person = new GraphQLObjectType({
     description: 'tabela Person',
     fields: () => {
         return {
-            id: {
+            personId: {
                 type : GraphQLInt,
                 resolve(person) {
-                    return person.id;
+                    return person.personId;
                 }
             },
             firstName: {
                 type: GraphQLString,
                 resolve(person) {
                     return person.firstName;
+                }
+            },
+            lastName: {
+                type: GraphQLString,
+                resolve(person) {
+                    return person.lastName; 
                 }
             },
             email: {
@@ -33,7 +39,7 @@ const Person = new GraphQLObjectType({
             posts: {
                 type: new GraphQLList(Post),
                 resolve(person) {
-                    return person.getPosts();                
+                    return person.getPost();                
                 }
             }
         };    
@@ -42,13 +48,13 @@ const Person = new GraphQLObjectType({
 
 const Post = new GraphQLObjectType({
     name: 'Post',
-    description: 'Tabela Post',
+    description: 'tabela Post',
     fields: () => {
         return {
-             id: {
+             postId: {
                  type: GraphQLInt,
                  resolve(post) {
-                     return post.id;
+                     return post.postId;
                  }
              },
              title: {
@@ -69,14 +75,14 @@ const Post = new GraphQLObjectType({
 
 const Query = new GraphQLObjectType({
     name: 'Query',
-    description: 'rootQuery moje',
+    description: 'Person+Post',
     fields: () => {
         return {
-            people: {
+            person: {
                 type: new GraphQLList(Person),
                 // szukanie po id i email
                 args: {
-                    id: {
+                    personId: {
                         type: GraphQLInt
                     },
                     email: {
@@ -87,7 +93,7 @@ const Query = new GraphQLObjectType({
                     return db.models.person.findAll({where: args});
                 }
             },
-            posts: {
+            post: {
                 type: new GraphQLList(Post),
                 resolve(root,args) {
                     return db.models.post.findAll({where: args});
